@@ -1,1 +1,1 @@
-# software for predicting the outcomes of CS:GO matches 
+# Software for predicting the outcomes of CS:GO matches 
