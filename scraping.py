@@ -31,10 +31,6 @@ time.sleep(10)
 #driver.find_element(By.ID,'CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll').click()
 event = "blast fall groups 2023"
 
-driver_ua = driver.execute_script("return navigator.userAgent")
-print("User agent:")
-print(driver_ua)
-
 #variables for dataset        #should be updated each iteration
 team_names = []
 maps = []
@@ -140,8 +136,6 @@ for match_order in range(num):
         WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.CLASS_NAME,'stats-top-menu-item.stats-top-menu-item-link'))
         )
-        tabs = driver.find_elements(By.CLASS_NAME,'stats-top-menu-item.stats-top-menu-item-link')
-
 
         driver.find_elements(By.CLASS_NAME,'stats-top-menu-item.stats-top-menu-item-link')[3].click()
         Select(driver.find_element(By.CLASS_NAME,'stats-sub-navigation-simple-filter-time')).select_by_index(2)
