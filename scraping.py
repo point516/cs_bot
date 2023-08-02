@@ -119,16 +119,16 @@ for match_order in range(num):
         driver.find_elements(By.CLASS_NAME,'tab.text-ellipsis')[-1].click()
         for map in driver.find_elements(By.CLASS_NAME,'map-statistics-row'):
             if map.find_element(By.CLASS_NAME,'map-statistics-row-map-mapname').text in maps:
-                map_winrate.append(float(map.find_element(By.CLASS_NAME,'map-statistics-row-win-percentage').text[:2])/100)
+                map_winrate.append(float(map.find_element(By.CLASS_NAME,'map-statistics-row-win-percentage').text[:-1])/100)
                 map.click()
 
                 time.sleep(1)
                 stats = driver.find_element(By.CLASS_NAME,'map-statistics-extended.active')
 
                 maps_played.append(float(stats.find_elements(By.CLASS_NAME,'stat')[0].text) + float(stats.find_elements(By.CLASS_NAME,'stat')[2].text))
-                _5v4.append(float(stats.find_elements(By.CLASS_NAME,'map-statistics-extended-general-stat')[0].find_elements(By.TAG_NAME,'div')[1].text[:4])/100)
-                _4v5.append(float(stats.find_elements(By.CLASS_NAME,'map-statistics-extended-general-stat')[1].find_elements(By.TAG_NAME,'div')[1].text[:4])/100)
-                pistol.append(float(stats.find_elements(By.CLASS_NAME,'map-statistics-extended-general-stat')[2].find_elements(By.TAG_NAME,'div')[1].text[:4])/100)
+                _5v4.append(float(stats.find_elements(By.CLASS_NAME,'map-statistics-extended-general-stat')[0].find_elements(By.TAG_NAME,'div')[1].text[:-1])/100)
+                _4v5.append(float(stats.find_elements(By.CLASS_NAME,'map-statistics-extended-general-stat')[1].find_elements(By.TAG_NAME,'div')[1].text[:-1])/100)
+                pistol.append(float(stats.find_elements(By.CLASS_NAME,'map-statistics-extended-general-stat')[2].find_elements(By.TAG_NAME,'div')[1].text[:-1])/100)
 
                 driver.find_element(By.CLASS_NAME,'map-statistics-row.active').click()
 
