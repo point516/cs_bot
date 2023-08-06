@@ -37,6 +37,24 @@ cur.execute("""CREATE TABLE IF NOT EXISTS dataset (
 );
 """)
 
+cur.execute("""CREATE TABLE IF NOT EXISTS blast_fall_groups2023_rating (
+    id SERIAL PRIMARY KEY,
+    team VARCHAR,
+    team_rating REAL,
+    event_rating REAL
+);
+""")
+
+cur.execute("""CREATE TABLE IF NOT EXISTS betting_info (
+    id SERIAL PRIMARY KEY,
+    team VARCHAR,
+    rounds_lost REAL,
+    rounds_won REAL,
+    first_pick BOOLEAN,
+    first_pick_pc REAL
+);
+""")
+
 conn.commit()
 
 cur.close()
