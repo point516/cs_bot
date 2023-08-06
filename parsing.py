@@ -25,11 +25,11 @@ class Parser:
         maps = []
         y_true = []
 
-        winstreak = [0.0,0.0]
-        h2h = [0,0]
-        ranking = [0,0]
-        weeks = [0,0]
-        age = [0,0]
+        winstreak = []
+        h2h = []
+        ranking = []
+        weeks = []
+        age = []
         map_winrate = []
         maps_played = []
         _5v4 = []
@@ -77,13 +77,14 @@ class Parser:
                 try:
                     streak = box.find_element(By.CLASS_NAME,'past-matches-streak')
                 except:
+                    winstreak.append(0.0)
                     continue
                 else:
-                    winstreak[i] = float(streak.text[0])
+                    winstreak.append(float(streak.text[0]))
 
             #H2h
-            h2h[0] = float(self.driver.find_element(By.CLASS_NAME,'flexbox-column.flexbox-center.grow.right-border').find_element(By.CLASS_NAME,'bold').text)
-            h2h[1] = float(self.driver.find_element(By.CLASS_NAME,'flexbox-column.flexbox-center.grow.left-border').find_element(By.CLASS_NAME,'bold').text)
+            h2h.append(float(self.driver.find_element(By.CLASS_NAME,'flexbox-column.flexbox-center.grow.right-border').find_element(By.CLASS_NAME,'bold').text))
+            h2h.append(float(self.driver.find_element(By.CLASS_NAME,'flexbox-column.flexbox-center.grow.left-border').find_element(By.CLASS_NAME,'bold').text))
 
 
             for map in self.driver.find_elements(By.CLASS_NAME,'mapholder'):
@@ -101,9 +102,9 @@ class Parser:
 
                 stats = self.driver.find_elements(By.CLASS_NAME,'profile-team-stat')
 
-                ranking[team] = float(stats[0].find_element(By.CLASS_NAME,'right').text[1:])
-                weeks[team] = float(stats[1].find_element(By.CLASS_NAME,'right').text)  
-                age[team] = float(stats[2].find_element(By.CLASS_NAME,'right').text)
+                ranking.append(float(stats[0].find_element(By.CLASS_NAME,'right').text[1:]))
+                weeks.append(float(stats[1].find_element(By.CLASS_NAME,'right').text))
+                age.append(float(stats[2].find_element(By.CLASS_NAME,'right').text))
 
                 self.driver.find_elements(By.CLASS_NAME,'tab.text-ellipsis')[-1].click()
                 for map in self.driver.find_elements(By.CLASS_NAME,'map-statistics-row'):
@@ -137,24 +138,22 @@ class Parser:
                 self.driver.close()
                 self.driver.switch_to.window(self.driver.window_handles[1])  # Switch to the first tab at the end of parsing first team
 
-                print(team_names)
-                print(y_true)
-                print(maps)
-                print(winstreak)
-                print(h2h)
-                print(ranking)
-                print(weeks)
-                print(age)
-                print(map_winrate)
-                print(maps_played)
-                print(_5v4)
-                print(_4v5)
-                print(pistol)
-                print(rating_3m)
-
-
-
                 time.sleep(5)
+
+            print(team_names)
+            print(y_true)
+            print(maps)
+            print(winstreak)
+            print(h2h)
+            print(ranking)
+            print(weeks)
+            print(age)
+            print(map_winrate)
+            print(maps_played)
+            print(_5v4)
+            print(_4v5)
+            print(pistol)
+            print(rating_3m)
             
             self.driver.close()    
             self.driver.switch_to.window(self.driver.window_handles[0])
@@ -298,4 +297,4 @@ if __name__ == "__main__":
     parser = Parser()
     parser.start_driver()
 
-    parser.parse_bet("https://www.hltv.org/betting/analytics/2365707/bad-news-eagles-vs-mibr-cct-2023-online-finals-2")
+    parser.parse_event("https://hltv.org", "blast fall groups 2023")
