@@ -6,6 +6,9 @@ cur = conn.cursor()
 
 cur.execute("""CREATE TABLE IF NOT EXISTS dataset (
     id SERIAL PRIMARY KEY,
+    t1_name VARCHAR,
+    t2_name VARCHAR,
+    map_name VARCHAR,
     t1_h2h REAL,
     t2_h2h REAL, 
     t1_winstreak REAL,
