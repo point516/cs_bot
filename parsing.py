@@ -25,6 +25,7 @@ class Parser:
         maps = []
         y_true = []
 
+        num_maps = []
         winstreak = []
         h2h = []
         ranking = []
@@ -36,6 +37,10 @@ class Parser:
         _4v5 = []
         pistol = []
         rating_3m = []
+
+        #temporary variables
+        temp_teams = []
+        temp_maps = []
 
         search = WebDriverWait(self.driver, 5).until(
             EC.presence_of_element_located((By.CLASS_NAME, "navsearchinput.tt-input.js-bound"))
@@ -67,13 +72,15 @@ class Parser:
             time.sleep(5)
             self.driver.switch_to.window(self.driver.window_handles[-1])  # Switch to the second tab/window (index 1)
 
+            temp_teams.append(self.driver.find_element(By.CLASS_NAME,'standard-box.teamsBox').find_elements(By.CLASS_NAME,'teamName')[0].text)
+            temp_teams.append(self.driver.find_element(By.CLASS_NAME,'standard-box.teamsBox').find_elements(By.CLASS_NAME,'teamName')[1].text)
 
             team_names.append(self.driver.find_element(By.CLASS_NAME,'standard-box.teamsBox').find_elements(By.CLASS_NAME,'teamName')[0].text)
             team_names.append(self.driver.find_element(By.CLASS_NAME,'standard-box.teamsBox').find_elements(By.CLASS_NAME,'teamName')[1].text)
 
 
             past_matches = self.driver.find_elements(By.CLASS_NAME,'past-matches-box.text-ellipsis')   
-            for i, box in enumerate(past_matches):
+            for box in past_matches[:2]:
                 try:
                     streak = box.find_element(By.CLASS_NAME,'past-matches-streak')
                 except:
@@ -86,13 +93,15 @@ class Parser:
             h2h.append(float(self.driver.find_element(By.CLASS_NAME,'flexbox-column.flexbox-center.grow.right-border').find_element(By.CLASS_NAME,'bold').text))
             h2h.append(float(self.driver.find_element(By.CLASS_NAME,'flexbox-column.flexbox-center.grow.left-border').find_element(By.CLASS_NAME,'bold').text))
 
-
             for map in self.driver.find_elements(By.CLASS_NAME,'mapholder'):
                     try:
+                        temp_maps.append(map.find_element(By.CLASS_NAME,'played').find_element(By.TAG_NAME,'img').get_attribute('title'))
                         maps.append(map.find_element(By.CLASS_NAME,'played').find_element(By.TAG_NAME,'img').get_attribute('title'))
-                        y_true.append(float(team_names.index(map.find_element(By.CLASS_NAME,'results.played').find_element(By.CLASS_NAME,'won').find_element(By.TAG_NAME,'img').get_attribute('title'))))
+                        y_true.append(float(temp_teams.index(map.find_element(By.CLASS_NAME,'results.played').find_element(By.CLASS_NAME,'won').find_element(By.TAG_NAME,'img').get_attribute('title'))))
                     except:
                         continue
+            
+            num_maps.append(len(temp_maps))
 
             for team in range(2):
                 action_chains = ActionChains(self.driver)
@@ -108,7 +117,7 @@ class Parser:
 
                 self.driver.find_elements(By.CLASS_NAME,'tab.text-ellipsis')[-1].click()
                 for map in self.driver.find_elements(By.CLASS_NAME,'map-statistics-row'):
-                    if map.find_element(By.CLASS_NAME,'map-statistics-row-map-mapname').text in maps:
+                    if map.find_element(By.CLASS_NAME,'map-statistics-row-map-mapname').text in temp_maps:
                         map_winrate.append(float(map.find_element(By.CLASS_NAME,'map-statistics-row-win-percentage').text[:-1])/100)
                         map.click()
 
@@ -143,6 +152,7 @@ class Parser:
             print(team_names)
             print(y_true)
             print(maps)
+            print(num_maps)
             print(winstreak)
             print(h2h)
             print(ranking)
@@ -154,6 +164,9 @@ class Parser:
             print(_4v5)
             print(pistol)
             print(rating_3m)
+
+            temp_maps.clear()
+            temp_teams.clear()
             
             self.driver.close()    
             self.driver.switch_to.window(self.driver.window_handles[0])
@@ -161,6 +174,7 @@ class Parser:
 
 
         self.driver.quit()
+        return team_names,y_true,maps,num_maps,winstreak,h2h,ranking,weeks,age,map_winrate,maps_played,_5v4,_4v5,pistol,rating_3m
 
     def parse_event_rating(self, url, event):
         self.driver.get("https://hltv.org")
