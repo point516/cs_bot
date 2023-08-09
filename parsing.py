@@ -177,10 +177,9 @@ class Parser:
         return team_names,y_true,maps,num_maps,winstreak,h2h,ranking,weeks,age,map_winrate,maps_played,_5v4,_4v5,pistol,rating_3m
 
     def parse_event_rating(self, url, event):
-        self.driver.get("https://hltv.org")
+        self.driver.get(url)
         time.sleep(10)
 
-        event = "blast fall groups 2023"
         #variables for dataset
         teams = []
         team_rating = []
@@ -242,6 +241,7 @@ class Parser:
             time.sleep(1)
         
         self.driver.quit()
+        return teams, team_rating, event_rating
 
     def parse_bet(self, url):
         self.driver.get(url)
