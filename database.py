@@ -1,62 +1,40 @@
 import psycopg2
 
-conn = psycopg2.connect(host="localhost", dbname='postgres', user='postgres', password='123456', port=5432)
+class Database:
+    def __init__(self, dbname, user, password, host, port):
+        self.dbname = dbname
+        self.user = user
+        self.password = password
+        self.host = host
+        self.port = port
+        self.connection = None
 
-cur = conn.cursor()
+    def connect(self):
+        try:
+            self.connection = psycopg2.connect(
+                dbname=self.dbname,
+                user=self.user,
+                password=self.password,
+                host=self.host,
+                port=self.port
+            )
+            print("Connected to the database")
+        except psycopg2.Error as e:
+            print("Error: Unable to connect to the database")
+            print(e)
 
-cur.execute("""CREATE TABLE IF NOT EXISTS dataset (
-    id SERIAL PRIMARY KEY,
-    t1_name VARCHAR,
-    t2_name VARCHAR,
-    t1_winstreak REAL,
-    t2_winstreak REAL,
-    t1_h2h REAL,
-    t2_h2h REAL,
-    t1_ranking REAL,
-    t2_ranking REAL,
-    t1_weeks REAL,
-    t2_weeks REAL,
-    t1_age REAL,
-    t2_age REAL,
-    t1_rating REAL,
-    t2_rating REAL,
-    map_name VARCHAR, 
-    t1_winrate REAL,
-    t2_winrate REAL,
-    t1_5v4 REAL,
-    t2_5v4 REAL,
-    t1_4v5 REAL,
-    t2_4v5 REAL,
-    t1_pistol REAL,
-    t2_pistol REAL,
-    t1_maps REAL,
-    t2_maps REAL,
-    t1_coef REAL DEFAULT 0.0,
-    t2_coef REAL DEFAULT 0.0,
-    
-    win BOOLEAN
-);
-""")
+    def execute_query(self, query, params=None):
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute(query, params)
+            self.connection.commit()
+            cursor.close()
+            print('Success')
+        except psycopg2.Error as e:
+            print("Error executing query:")
+            print(e)
 
-cur.execute("""CREATE TABLE IF NOT EXISTS blast_fall_groups2023_rating (
-    id SERIAL PRIMARY KEY,
-    team VARCHAR,
-    team_rating REAL,
-    event_rating REAL
-);
-""")
-
-cur.execute("""CREATE TABLE IF NOT EXISTS betting_info (
-    id SERIAL PRIMARY KEY,
-    team VARCHAR,
-    rounds_lost REAL,
-    rounds_won REAL,
-    first_pick BOOLEAN,
-    first_pick_pc REAL
-);
-""")
-
-conn.commit()
-
-cur.close()
-conn.close()
+    def disconnect(self):
+        if self.connection:
+            self.connection.close()
+            print("Disconnected from the database")
