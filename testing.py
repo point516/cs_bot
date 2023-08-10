@@ -40,14 +40,41 @@ parser.start_driver()
 #     stat_index += 2
 
 
-teams, team_rating, event_rating = parser.parse_event_rating("https://hltv.org", "blast fall groups 2023")
-for index in range(len(teams)):
-    insert_query = ("""INSERT INTO blast_fall_groups2023_rating (team, team_rating, event_rating)
-                     VALUES (%s,%s,%s);
-                """)
+# teams, team_rating, event_rating = parser.parse_event_rating("https://hltv.org", "blast fall groups 2023")
+# for index in range(len(teams)):
+#     insert_query = ("""INSERT INTO blast_fall_groups2023_rating (team, team_rating, event_rating)
+#                      VALUES (%s,%s,%s);
+#                 """)
         
         
-    data_to_insert = (teams[index], team_rating[index], event_rating[index])
+#     data_to_insert = (teams[index], team_rating[index], event_rating[index])
+
+#     cur.execute(insert_query, data_to_insert)
+#     conn.commit()
+
+
+team_names, rounds_lost, rounds_won, first_pick, first_pick_pc = parser.parse_bet('https://www.hltv.org/betting/analytics/2365868/furia-academy-vs-meta-cct-south-america-series-9')
+for index in range(len(team_names)):
+    insert_query = ("""INSERT INTO betting_info (
+                                            team, rounds_lost_mirage, rounds_won_mirage, fp_mirage, fp_percent_mirage,
+                                            rounds_lost_inferno, rounds_won_inferno, fp_inferno, fp_percent_inferno,
+                                            rounds_lost_nuke, rounds_won_nuke, fp_nuke, fp_percent_nuke,
+                                            rounds_lost_overpass, rounds_won_overpass, fp_overpass, fp_percent_overpass,
+                                            rounds_lost_vertigo, rounds_won_vertigo, fp_vertigo, fp_percent_vertigo,
+                                            rounds_lost_ancient, rounds_won_ancient, fp_ancient, fp_percent_ancient,
+                                            rounds_lost_anubis, rounds_won_anubis, fp_anubis, fp_percent_anubis
+                                                )
+                      VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);
+                 """)
+        
+        
+    data_to_insert = (team_names[index], rounds_lost[index*7], rounds_won[index*7], first_pick[index], first_pick_pc[index],
+                      rounds_lost[index*7+1], rounds_won[index*7+1], first_pick[index+2], first_pick_pc[index+2],
+                      rounds_lost[index*7+2], rounds_won[index*7+2], first_pick[index+4], first_pick_pc[index+4],
+                      rounds_lost[index*7+3], rounds_won[index*7+3], first_pick[index+6], first_pick_pc[index+6],
+                      rounds_lost[index*7+4], rounds_won[index*7+4], first_pick[index+8], first_pick_pc[index+8],
+                      rounds_lost[index*7+5], rounds_won[index*7+5], first_pick[index+10], first_pick_pc[index+10],
+                      rounds_lost[index*7+6], rounds_won[index*7+6], first_pick[index+12], first_pick_pc[index+12],)
 
     cur.execute(insert_query, data_to_insert)
     conn.commit()
