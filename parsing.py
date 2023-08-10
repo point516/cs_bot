@@ -296,6 +296,7 @@ class Parser:
         print(first_pick_pc)
 
         self.driver.quit()
+        return team_names, rounds_lost, rounds_won, first_pick, first_pick_pc
 
     def close_page(self):
         if hasattr(self, 'driver'):
