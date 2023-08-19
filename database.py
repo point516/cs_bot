@@ -128,4 +128,4 @@ if __name__ == "__main__":
               port=5432)
     db.connect()
 
-    db.fill_bet("https://www.hltv.org/betting/analytics/2365918/500-vs-thunderflash-cct-east-europe-series-1")
+    db.fill_event('iem cologne 2023','iem_cologne2023_rating')
