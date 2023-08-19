@@ -79,7 +79,7 @@ class Parser:
             team_names.append(self.driver.find_element(By.CLASS_NAME,'standard-box.teamsBox').find_elements(By.CLASS_NAME,'teamName')[1].text)
 
 
-            past_matches = self.driver.find_elements(By.CLASS_NAME,'past-matches-box.text-ellipsis')   
+            past_matches = self.driver.find_elements(By.CLASS_NAME,'past-matches-box.text-ellipsis')[2:]   
             for box in past_matches[:2]:
                 try:
                     streak = box.find_element(By.CLASS_NAME,'past-matches-streak')
@@ -116,20 +116,22 @@ class Parser:
                 age.append(float(stats[2].find_element(By.CLASS_NAME,'right').text))
 
                 self.driver.find_elements(By.CLASS_NAME,'tab.text-ellipsis')[-1].click()
-                for map in self.driver.find_elements(By.CLASS_NAME,'map-statistics-row'):
-                    if map.find_element(By.CLASS_NAME,'map-statistics-row-map-mapname').text in temp_maps:
-                        map_winrate.append(float(map.find_element(By.CLASS_NAME,'map-statistics-row-win-percentage').text[:-1])/100)
-                        map.click()
+                #need rework?
+                for cur in temp_maps:
+                    for map in self.driver.find_elements(By.CLASS_NAME,'map-statistics-row'):
+                        if map.find_element(By.CLASS_NAME,'map-statistics-row-map-mapname').text in cur:
+                            map_winrate.append(float(map.find_element(By.CLASS_NAME,'map-statistics-row-win-percentage').text[:-1])/100)
+                            map.click()
 
-                        time.sleep(1)
-                        stats = self.driver.find_element(By.CLASS_NAME,'map-statistics-extended.active')
+                            time.sleep(1)
+                            stats = self.driver.find_element(By.CLASS_NAME,'map-statistics-extended.active')
 
-                        maps_played.append(float(stats.find_elements(By.CLASS_NAME,'stat')[0].text) + float(stats.find_elements(By.CLASS_NAME,'stat')[2].text))
-                        _5v4.append(float(stats.find_elements(By.CLASS_NAME,'map-statistics-extended-general-stat')[0].find_elements(By.TAG_NAME,'div')[1].text[:-1])/100)
-                        _4v5.append(float(stats.find_elements(By.CLASS_NAME,'map-statistics-extended-general-stat')[1].find_elements(By.TAG_NAME,'div')[1].text[:-1])/100)
-                        pistol.append(float(stats.find_elements(By.CLASS_NAME,'map-statistics-extended-general-stat')[2].find_elements(By.TAG_NAME,'div')[1].text[:-1])/100)
+                            maps_played.append(float(stats.find_elements(By.CLASS_NAME,'stat')[0].text) + float(stats.find_elements(By.CLASS_NAME,'stat')[2].text))
+                            _5v4.append(float(stats.find_elements(By.CLASS_NAME,'map-statistics-extended-general-stat')[0].find_elements(By.TAG_NAME,'div')[1].text[:-1])/100)
+                            _4v5.append(float(stats.find_elements(By.CLASS_NAME,'map-statistics-extended-general-stat')[1].find_elements(By.TAG_NAME,'div')[1].text[:-1])/100)
+                            pistol.append(float(stats.find_elements(By.CLASS_NAME,'map-statistics-extended-general-stat')[2].find_elements(By.TAG_NAME,'div')[1].text[:-1])/100)
 
-                        self.driver.find_element(By.CLASS_NAME,'map-statistics-row.active').click()
+                            self.driver.find_element(By.CLASS_NAME,'map-statistics-row.active').click()
 
                 self.driver.find_elements(By.CLASS_NAME,'moreButton')[-1].click()
                 WebDriverWait(self.driver, 5).until(
@@ -152,6 +154,7 @@ class Parser:
             print(team_names)
             print(y_true)
             print(maps)
+            print(temp_maps)
             print(num_maps)
             print(winstreak)
             print(h2h)
