@@ -46,6 +46,14 @@ cur.execute("""CREATE TABLE IF NOT EXISTS blast_fall_groups2023_rating (
 );
 """)
 
+cur.execute("""CREATE TABLE IF NOT EXISTS iem_cologne2023_rating (
+    id SERIAL PRIMARY KEY,
+    team VARCHAR,
+    team_rating REAL,
+    event_rating REAL
+);
+""")
+
 cur.execute("""CREATE TABLE IF NOT EXISTS betting_info (
     id SERIAL PRIMARY KEY,
     team VARCHAR,
