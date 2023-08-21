@@ -63,7 +63,7 @@ class Parser:
         )
         num = len(self.driver.find_elements(By.CLASS_NAME,'result'))
         #winstreaks
-        for match_order in range(num):
+        for match_order in range(3):
             #need to go to results page?
             matches = self.driver.find_elements(By.CLASS_NAME,'result')
 
@@ -151,21 +151,37 @@ class Parser:
 
                 time.sleep(5)
 
+            print("team_names")
             print(team_names)
+            print("y_true")
             print(y_true)
+            print("maps")
             print(maps)
+            print("temp_maps")
             print(temp_maps)
+            print("num_maps")
             print(num_maps)
+            print("winstreak")
             print(winstreak)
+            print("h2h")
             print(h2h)
+            print("ranking")
             print(ranking)
+            print("weeks")
             print(weeks)
+            print("age")
             print(age)
+            print("map_winrate")
             print(map_winrate)
+            print("maps_played")
             print(maps_played)
+            print("_5v4")
             print(_5v4)
+            print("_4v5")
             print(_4v5)
+            print("pistol")
             print(pistol)
+            print("rating_3m")
             print(rating_3m)
 
             temp_maps.clear()
