@@ -63,7 +63,7 @@ class Parser:
         )
         num = len(self.driver.find_elements(By.CLASS_NAME,'result'))
         #winstreaks
-        for match_order in range(3):
+        for match_order in range(num):
             #need to go to results page?
             matches = self.driver.find_elements(By.CLASS_NAME,'result')
 
@@ -297,7 +297,10 @@ class Parser:
 
         veto_stats = self.driver.find_element(By.CLASS_NAME,'analytics-map-stats').find_element(By.TAG_NAME,'tbody')
         for row in veto_stats.find_elements(By.TAG_NAME,'tr'):
-            first_pick_pc.append(float(row.find_element(By.CLASS_NAME,'analytics-map-stats-pick-percentage').text[:-1])/100)
+            try:
+                first_pick_pc.append(float(row.find_element(By.CLASS_NAME,'analytics-map-stats-pick-percentage').text[:-1])/100)
+            except:
+                first_pick_pc.append(0.0)
 
             try:
                 if row.find_element(By.CLASS_NAME,'analytics-map-stats-comment').find_element(By.CLASS_NAME,'comment.neutral').text == 'First pick':
