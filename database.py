@@ -56,9 +56,8 @@ class Database:
                                 
                             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);
                     """)
-                
-                map_info = (maps[map_index], map_winrate[stat_index], map_winrate[stat_index+2], maps_played[stat_index], maps_played[stat_index+2],
-                            _5v4[stat_index], _5v4[stat_index+2], _4v5[stat_index], _4v5[stat_index+2], pistol[stat_index], pistol[stat_index+2],
+                map_info = (maps[map_index], map_winrate[stat_index], map_winrate[stat_index+num_maps[match_index]], maps_played[stat_index], maps_played[stat_index+num_maps[match_index]],
+                            _5v4[stat_index], _5v4[stat_index+num_maps[match_index]], _4v5[stat_index], _4v5[stat_index+num_maps[match_index]], pistol[stat_index], pistol[stat_index+num_maps[match_index]],
                             not(bool(y_true[map_index])))    
                 
                 data_to_insert = team_info + map_info
@@ -67,7 +66,7 @@ class Database:
 
                 stat_index += 1
                 map_index += 1
-            stat_index += 2
+            stat_index += num_maps[match_index]
         self.disconnect()
     
     def fill_event(self, event_name, table_name):
@@ -128,4 +127,4 @@ if __name__ == "__main__":
               port=5432)
     db.connect()
 
-    db.fill_event('iem cologne 2023','iem_cologne2023_rating')
+    db.fill_bet('https://www.hltv.org/betting/analytics/2366083/heroic-vs-rooster-esl-pro-league-season-18')
