@@ -4,8 +4,9 @@ import psycopg2
 conn = psycopg2.connect(host="localhost", dbname='postgres', user='postgres', password='123456', port=5432)
 cur = conn.cursor()
 
-len = 57
+len = 131
 start = 16
+
 maps = []
 dataset = []
 
@@ -28,7 +29,7 @@ for index in range(len):
             WHERE dataset.id = {start+index}
             """
     cur.execute(query)
-    team_1 = cur.fetchall()[0]
+    row = cur.fetchall()[0]
     query = f"""
             SELECT betting_info.rounds_lost_{maps[index]}, betting_info.rounds_won_{maps[index]}, betting_info.fp_{maps[index]}, betting_info.fp_percent_{maps[index]}
             FROM dataset
@@ -36,17 +37,47 @@ for index in range(len):
             WHERE dataset.id = {start+index}
             """
     cur.execute(query)
-    team_2 = cur.fetchall()[0]
-    query = f"""
-            SELECT betting_info.rounds_lost_{maps[index]}, betting_info.rounds_won_{maps[index]}, betting_info.fp_{maps[index]}, betting_info.fp_percent_{maps[index]}
-            FROM dataset
-            FULL OUTER JOIN betting_info ON dataset.t2_name = betting_info.team
-            WHERE dataset.id = {start+index}
-            """
-    cur.execute(query)
-    team_2 = cur.fetchall()[0]
+    row += cur.fetchall()[0]
 
-    dataset.append(team_1+team_2)
+    if start+index < 73:
+
+        query = f"""
+                SELECT blast_fall_groups2023_rating.team_rating, blast_fall_groups2023_rating.event_rating
+                FROM dataset
+                FULL OUTER JOIN blast_fall_groups2023_rating ON dataset.t1_name = blast_fall_groups2023_rating.team
+                WHERE dataset.id = {start+index}
+                """
+        cur.execute(query)
+        row += cur.fetchall()[0]
+        query = f"""
+                SELECT blast_fall_groups2023_rating.team_rating, blast_fall_groups2023_rating.event_rating
+                FROM dataset
+                FULL OUTER JOIN blast_fall_groups2023_rating ON dataset.t2_name = blast_fall_groups2023_rating.team
+                WHERE dataset.id = {start+index}
+                """
+        cur.execute(query)
+        row += cur.fetchall()[0]
+
+    elif start+index >= 73 and start+index < 147:
+
+        query = f"""
+                SELECT iem_cologne2023_rating.team_rating, iem_cologne2023_rating.event_rating
+                FROM dataset
+                FULL OUTER JOIN iem_cologne2023_rating ON dataset.t1_name = iem_cologne2023_rating.team
+                WHERE dataset.id = {start+index}
+                """
+        cur.execute(query)
+        row += cur.fetchall()[0]
+        query = f"""
+                SELECT iem_cologne2023_rating.team_rating, iem_cologne2023_rating.event_rating
+                FROM dataset
+                FULL OUTER JOIN iem_cologne2023_rating ON dataset.t2_name = iem_cologne2023_rating.team
+                WHERE dataset.id = {start+index}
+                """
+        cur.execute(query)
+        row += cur.fetchall()[0]
+
+    dataset.append(row)
 conn.close()
 
-print(dataset)
+print(dataset[57])
