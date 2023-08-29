@@ -88,6 +88,46 @@ cur.execute("""CREATE TABLE IF NOT EXISTS betting_info (
 );
 """)
 
+cur.execute("""CREATE TABLE IF NOT EXISTS dunav_rating (
+    id SERIAL PRIMARY KEY,
+    team VARCHAR,
+    team_rating REAL,
+    event_rating REAL
+);
+""")
+
+cur.execute("""CREATE TABLE IF NOT EXISTS gamers8_rating (
+    id SERIAL PRIMARY KEY,
+    team VARCHAR,
+    team_rating REAL,
+    event_rating REAL
+);
+""")
+
+cur.execute("""CREATE TABLE IF NOT EXISTS cct_online_rating (
+    id SERIAL PRIMARY KEY,
+    team VARCHAR,
+    team_rating REAL,
+    event_rating REAL
+);
+""")
+
+cur.execute("""CREATE TABLE IF NOT EXISTS cct_north_rating (
+    id SERIAL PRIMARY KEY,
+    team VARCHAR,
+    team_rating REAL,
+    event_rating REAL
+);
+""")
+
+cur.execute("""CREATE TABLE IF NOT EXISTS iem_sydney_rating (
+    id SERIAL PRIMARY KEY,
+    team VARCHAR,
+    team_rating REAL,
+    event_rating REAL
+);
+""")
+
 conn.commit()
 
 cur.close()
