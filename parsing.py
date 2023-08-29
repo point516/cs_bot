@@ -18,7 +18,6 @@ class Parser:
     def parse_event(self, url, event):
         self.driver.get(url)
         time.sleep(10)
-        #driver.find_element(By.ID,'CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll').click()
 
         #variables for dataset        #should be updated each iteration
         team_names = []
@@ -113,7 +112,10 @@ class Parser:
 
                 ranking.append(float(stats[0].find_element(By.CLASS_NAME,'right').text[1:]))
                 weeks.append(float(stats[1].find_element(By.CLASS_NAME,'right').text))
-                age.append(float(stats[2].find_element(By.CLASS_NAME,'right').text))
+                try:
+                    age.append(float(stats[2].find_element(By.CLASS_NAME,'right').text))
+                except:
+                    age.append(23.0)
 
                 self.driver.find_elements(By.CLASS_NAME,'tab.text-ellipsis')[-1].click()
                 #need rework?
