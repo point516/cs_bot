@@ -127,4 +127,4 @@ if __name__ == "__main__":
               port=5432)
     db.connect()
 
-    db.fill_bet('https://www.hltv.org/betting/analytics/2366083/heroic-vs-rooster-esl-pro-league-season-18')
+    db.fill_bet('https://www.hltv.org/betting/analytics/2366099/apeks-vs-m80-esl-pro-league-season-18')
