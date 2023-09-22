@@ -220,7 +220,7 @@ class Parser:
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located((By.CLASS_NAME,'event-hub-link'))
         )
-        self.driver.find_elements(By.CLASS_NAME,'event-hub-link')[2].click()
+        self.driver.find_elements(By.CLASS_NAME,'event-hub-link')[3].click()
 
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located((By.CLASS_NAME,'stats-section.stats-team.stats-sidebar'))
