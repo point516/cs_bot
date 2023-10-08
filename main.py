@@ -16,6 +16,6 @@ async def read_root():
     return HTMLResponse(content=html_content)
 
 @app.post("/")
-async def submit_form(hltv_link: str = Form(...)):   
+async def submit_form(hltv_link: str = Form(...), ai_model: str = Form(...)):   
     # 'hltv_link' contains the submitted link
-    return {"hltv_link": hltv_link}
+    return {"hltv_link": hltv_link, "Model": ai_model}
