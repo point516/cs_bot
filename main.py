@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -14,3 +14,8 @@ async def read_root():
         html_content = file.read()
     
     return HTMLResponse(content=html_content)
+
+@app.post("/")
+async def submit_form(hltv_link: str = Form(...)):   
+    # 'hltv_link' contains the submitted link
+    return {"hltv_link": hltv_link}
