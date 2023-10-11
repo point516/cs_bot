@@ -539,7 +539,7 @@ class Parser:
         print('first_pick_pc')
         print(first_pick_pc)
 
-        return team_names, team_rating, ranking, matches_winstreak, h2h, weeks, age, _4v5, _5v4, pistol, rounds_lost, rounds_won, first_pick, first_pick_pc, rating_3m, rating_event, num_maps, winrate, maps_played
+        return team_names, team_rating, ranking, matches_winstreak, h2h, weeks, age, _4v5, _5v4, pistol, rounds_lost, rounds_won, first_pick, first_pick_pc, rating_3m, rating_event, winrate, maps_played
 
 
     def close_page(self):
