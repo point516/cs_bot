@@ -51,12 +51,14 @@
 <body>
     <div class="form-container">
         <h1>Enter HLTV Match Link</h1>
-        <form action="/" method="post">
+        <form action="/predict" method="post">
             <input type="text" name="hltv_link" id="hltv-link" placeholder="https://www.hltv.org/matches/...">
             <select name="ai_model" id="ai-model">
-                <option value="model1">AI Model 1</option>
-                <option value="model2">AI Model 2</option>
-                <option value="model3">AI Model 3</option>
+                <option value="XGBoost">XGBoost</option>
+                <option value="CatBoost">CatBoost</option>
+                <option value="LightGBM">LightGBM</option>
+                <option value="Sklearn_1">Sklearn 1</option>
+                <option value="Sklearn_2">Sklearn 2</option>
             </select>
             <input type="submit" value="Submit">
         </form>
