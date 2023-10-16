@@ -3,65 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="web/style.css">
     <title>AI predictor</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f0f0f0;
-        }
-        .form-container {
-            text-align: center;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-        input[type="text"] {
-            width: 80%;
-            padding: 10px;
-            margin: 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        input[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-        select {
-            width: 86%;
-            padding: 9.25px 12px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-    </style>
 </head>
 <body>
-    <div class="form-container">
-        <h1>Enter HLTV Match Link</h1>
+    <div class="form-container"> 
+        <div class="description"> 
+            <h3 class="heading">Hello and Welcome to AI-assisted Counter Strike 2 outcome predictor &#x1F917;</h3>  
+            <p>This &#x1F916; AI predictor tool gives predictions based on a variety of <span class="star">stats</span> &#x1F92F; collected from HLTV.ORG.</p>
+            <h1>Choose AI Model and Enter HLTV Match Link</h1>
+        </div>
         <form action="/predict" method="post">
-            <input type="text" name="hltv_link" id="hltv-link" placeholder="https://www.hltv.org/matches/...">
-            <select name="ai_model" id="ai-model">
+            <select style="display: inline-block;" name="ai_model" id="ai-model">
                 <option value="XGBoost">XGBoost</option>
                 <option value="CatBoost">CatBoost</option>
                 <option value="LightGBM">LightGBM</option>
                 <option value="Sklearn_1">Sklearn 1</option>
                 <option value="Sklearn_2">Sklearn 2</option>
             </select>
+            <input style="display: inline-block;" type="text" name="hltv_link" id="hltv-link" placeholder="https://www.hltv.org/matches/...">
             <input type="submit" value="Submit">
         </form>
     </div>
+    <div class="stats">
+        <h5>Analyzed Stats</h5>
+        <div class="used_stats">Current Winstreaks<br>
+            Head-to-Head score<br>
+            Team Rankings<br>
+            Weeks in Top30<br>
+            Average Age<br>
+            Players' Ratings<br>
+            Map Winrate<br>
+            5 vs 4 conversions<br>
+            4 vs 5 conversions<br>
+            Number of Maps Played<br>
+            Pistol Rounds Winrate<br>
+            Average Rounds Lost<br>
+            Average Rounds Won<br>
+            First Pick Percentage<br>
+            Team Rating on Event<br>
+            Event Ratings<br>
+        </div>
+    </div>
+    <script src="web/script.js"></script>
 </body>
 </html>
