@@ -7,42 +7,60 @@
     <title>AI predictor</title>
 </head>
 <body>
-    <div class="form-container"> 
-        <div class="description"> 
-            <h3 class="heading">Hello and Welcome to AI-assisted Counter Strike 2 outcome predictor &#x1F917;</h3>  
-            <p>This &#x1F916; AI predictor tool gives predictions based on a variety of <span class="star">stats</span> &#x1F92F; collected from HLTV.ORG.</p>
-            <h1>Choose AI Model and Enter HLTV Match Link</h1>
+    <div class='row'>
+        <div class="form-container"> 
+            <div class="description"> 
+                <h3 class="heading">Hello and Welcome to AI-assisted Counter Strike 2 outcome predictor &#x1F917;</h3>  
+                <p>This &#x1F916; AI predictor tool gives predictions based on a variety of <span class="star">stats</span> &#x1F92F; collected from HLTV.ORG.</p>
+                <h1>Choose AI Model and Enter HLTV Match Link</h1>
+            </div>
+            <form action="/predict" method="post">
+                <input style="display: inline-block;" type="text" name="hltv_link" id="hltv-link" placeholder="https://www.hltv.org/matches/...">
+                <select style="display: inline-block;" name="map" id="map">
+                    <option value="Mirage">Mirage</option>
+                    <option value="Inferno">Inferno</option>
+                    <option value="Nuke">Nuke</option>
+                    <option value="Overpass">Overpass</option>
+                    <option value="Vertigo">Vertigo</option>
+                    <option value="Ancient">Ancient</option>
+                    <option value="Anubis">Anubis</option>
+                </select>
+                <div class="row_2">
+                    <select style="display: inline-block; margin: 5px 1px;" name="ai_model" id="ai-model">
+                        <option value="XGBoost">XGBoost</option>
+                        <option value="CatBoost">CatBoost</option>
+                        <option value="LightGBM">LightGBM</option>
+                        <option value="LogReg">LogReg</option>
+                        <option value="LDA">LDA</option>
+                    </select>
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
         </div>
-        <form action="/predict" method="post">
-            <select style="display: inline-block;" name="ai_model" id="ai-model">
-                <option value="XGBoost">XGBoost</option>
-                <option value="CatBoost">CatBoost</option>
-                <option value="LightGBM">LightGBM</option>
-                <option value="Sklearn_1">Sklearn 1</option>
-                <option value="Sklearn_2">Sklearn 2</option>
-            </select>
-            <input style="display: inline-block;" type="text" name="hltv_link" id="hltv-link" placeholder="https://www.hltv.org/matches/...">
-            <input type="submit" value="Submit">
-        </form>
+        <div class="stats">
+            <h5>Analyzed Stats</h5>
+            <div class="used_stats">Current Winstreaks<br>
+                Head-to-Head score<br>
+                Team Rankings<br>
+                Weeks in Top30<br>
+                Average Age<br>
+                Players' Ratings<br>
+                Map Winrate<br>
+                5 vs 4 conversions<br>
+                4 vs 5 conversions<br>
+                Number of Maps Played<br>
+                Pistol Rounds Winrate<br>
+                Average Rounds Lost<br>
+                Average Rounds Won<br>
+                First Pick Percentage<br>
+                Team Rating on Event<br>
+                Event Ratings<br>
+            </div>
+        </div>
     </div>
-    <div class="stats">
-        <h5>Analyzed Stats</h5>
-        <div class="used_stats">Current Winstreaks<br>
-            Head-to-Head score<br>
-            Team Rankings<br>
-            Weeks in Top30<br>
-            Average Age<br>
-            Players' Ratings<br>
-            Map Winrate<br>
-            5 vs 4 conversions<br>
-            4 vs 5 conversions<br>
-            Number of Maps Played<br>
-            Pistol Rounds Winrate<br>
-            Average Rounds Lost<br>
-            Average Rounds Won<br>
-            First Pick Percentage<br>
-            Team Rating on Event<br>
-            Event Ratings<br>
+    <div class="row">
+        <div id="info">
+            <strong>XGBoost: </strong> Predictions Accuracy: 79.15% <br> <strong>Important Stats:</strong> Map Winrates, 5 VS 4 Conversions, Team Ratings, Event Ratings
         </div>
     </div>
     <script src="web/script.js"></script>
