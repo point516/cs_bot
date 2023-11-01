@@ -1,23 +1,29 @@
-from fastapi import FastAPI, Form
+from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from parsing import Parser
+import pickle
+import numpy as np
+import shap
 
 app = FastAPI()
 
 # Mount the "static" directory as a static file directory
 app.mount("/web", StaticFiles(directory="web"), name="web")
 
+templates = Jinja2Templates(directory="web")  
+
 @app.get("/", response_class=HTMLResponse)
 async def read_root():
-    # You can use Python's open() function to read the HTML file
+    
     with open("web/index.html", "r") as file:
         html_content = file.read()
     
     return HTMLResponse(content=html_content)
 
-@app.post("/predict")
-async def submit_form(hltv_link: str = Form(...), ai_model: str = Form(...), map: str = Form(...)):   
+@app.post("/predict", response_class=HTMLResponse)
+async def submit_form(request: Request, hltv_link: str = Form(...), ai_model: str = Form(...), map: str = Form(...)):   
     parser = Parser()
     parser.start_driver()
 
@@ -61,6 +67,36 @@ async def submit_form(hltv_link: str = Form(...), ai_model: str = Form(...), map
         dif = data[index] - data[index + 2]
         data.append(dif)
     
-    print(data)
+    if ai_model == 'XGBoost':
+        with open('models/xgb.pkl', 'rb') as file:
+            model = pickle.load(file)
+    elif ai_model == 'CatBoost':
+        with open('models/cb.pkl', 'rb') as file:
+            model = pickle.load(file)
+    elif ai_model == 'LightGBM':
+        with open('models/lgb.pkl', 'rb') as file:
+            model = pickle.load(file)
+    elif ai_model == 'LogReg':
+        with open('models/logReg.pkl', 'rb') as file:
+            model = pickle.load(file)
+    elif ai_model == 'LDA':
+        with open('models/LDA.pkl', 'rb') as file:
+            model = pickle.load(file)
+    print(model)
+
+    np_data = np.array(data).reshape(1,-1)
+    print(np_data)
+    print(np_data.shape)
+    pred = model.predict(np_data)
+    print(pred)
+
+    explainer = shap.Explainer(model)
+    shap_values = explainer(np_data)
+    print(shap_values)
+
     # 'hltv_link' contains the submitted link
-    return {"hltv_link": hltv_link, "Model": ai_model, "Map": map}
+    with open("web/pred.html", "r") as file:
+        html_content = file.read()
+    
+    return templates.TemplateResponse("pred.html", {"request": request, "result": str(pred)})
+    # return {"hltv_link": hltv_link, "Model": ai_model, "Map": map, "Predict": pred}
