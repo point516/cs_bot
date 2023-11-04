@@ -3,18 +3,26 @@
 <head>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: left;
-            align-items: left;
-            height: 100vh;
             margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            font-family:'Monaco','Helvetica', monospace;
+            color: rgb(60, 60, 60);
+            flex-direction: column;
         }
 
         table {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 12px;
+            font-weight: bold;
             border-collapse: collapse;
-            width: 300px;
+            width: 320px;
             border: 2px solid #333;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -24,7 +32,7 @@
 
         th, td {
             border: 1px solid #ccc;
-            padding: 10px;
+            padding: 11px;
             text-align: center;
         }
 
@@ -41,15 +49,33 @@
         tr:nth-child(2n+1) {
             background-color: #e6e6e6;
         }
+
+        h3{
+            margin-top:0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow:
+            0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            margin: 0;
+            text-align: left;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <table>
         <thead>
             <tr>
-                <th></th>
-                <th>Column 2</th>
-                <th>Column 3</th>
+                <th>Collected Stats</th>
+                <th>{{ Team1 }}</th>
+                <th>{{ Team2 }}</th>
             </tr>
         </thead>
         <tbody>
@@ -104,7 +130,7 @@
                 <td>{{ stat20 }}</td>
             </tr>
             <tr>
-                <td>Pistol Round Win Percentage</td>
+                <td>Pistol Round Winrate</td>
                 <td>{{ stat21 }}</td>
                 <td>{{ stat22 }}</td>
             </tr>
@@ -140,11 +166,11 @@
             </tr>
         </tbody>
     </table>
-    <!-- <h2>
-        Predict
+    <div class="container">
+        <h3>Prediction:</h3>
         <p>
             {{ result }}
         </p>
-    </h2> -->
+    <div>
 </body>
 </html>
