@@ -1,12 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="web/style.css">
-    <title>AI predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: left;
+            align-items: left;
+            height: 100vh;
+            margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 300px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            margin: 10px 10px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #333; /* Bright blue background */
+            color: #fff; /* White text */
+            /* border-right-color: #ffffff; */
+        }
+
+        tr:nth-child(2n) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(2n+1) {
+            background-color: #e6e6e6;
+        }
+    </style>
 </head>
 <body>
-    <h2>Predict:</h2>
-    <p>{{ result }}</p>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Column 2</th>
+                <th>Column 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Winstreak</td>
+                <td>{{ stat1 }}</td>
+                <td>{{ stat2 }}</td>
+            </tr>
+            <tr>
+                <td>Head to Head</td>
+                <td>{{ stat3 }}</td>
+                <td>{{ stat4 }}</td>
+            </tr>
+            <tr>
+                <td>Ranking</td>
+                <td>{{ stat5 }}</td>
+                <td>{{ stat6 }}</td>
+            </tr>
+            <tr>
+                <td>Weeks in Top30</td>
+                <td>{{ stat7 }}</td>
+                <td>{{ stat8 }}</td>
+            </tr>
+            <tr>
+                <td>Average Age</td>
+                <td>{{ stat9 }}</td>
+                <td>{{ stat10 }}</td>
+            </tr>
+            <tr>
+                <td>HLTV Rating</td>
+                <td>{{ stat11 }}</td>
+                <td>{{ stat12 }}</td>
+            </tr>
+            <tr>
+                <td>Winrate</td>
+                <td>{{ stat13 }}</td>
+                <td>{{ stat14 }}</td>
+            </tr>
+            <tr>
+                <td>5 VS 4 Conversions</td>
+                <td>{{ stat15 }}</td>
+                <td>{{ stat16 }}</td>
+            </tr>
+            <tr>
+                <td>4 VS 5 Conversions</td>
+                <td>{{ stat17 }}</td>
+                <td>{{ stat18 }}</td>
+            </tr>
+            <tr>
+                <td>Maps Played</td>
+                <td>{{ stat19 }}</td>
+                <td>{{ stat20 }}</td>
+            </tr>
+            <tr>
+                <td>Pistol Round Win Percentage</td>
+                <td>{{ stat21 }}</td>
+                <td>{{ stat22 }}</td>
+            </tr>
+            <tr>
+                <td>Average Rounds Lost</td>
+                <td>{{ stat23 }}</td>
+                <td>{{ stat24 }}</td>
+            </tr>
+            <tr>
+                <td>Average Rounds Won</td>
+                <td>{{ stat25 }}</td>
+                <td>{{ stat26 }}</td>
+            </tr>
+            <tr>
+                <td>First Pick?</td>
+                <td>{{ stat27 }}</td>
+                <td>{{ stat28 }}</td>
+            </tr>
+            <tr>
+                <td>First Pick Percentage</td>
+                <td>{{ stat29 }}</td>
+                <td>{{ stat30 }}</td>
+            </tr>
+            <tr>
+                <td>Event Team Rating</td>
+                <td>{{ stat31 }}</td>
+                <td>{{ stat32 }}</td>
+            </tr>
+            <tr>
+                <td>Event Players' Rating</td>
+                <td>{{ stat33 }}</td>
+                <td>{{ stat34 }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- <h2>
+        Predict
+        <p>
+            {{ result }}
+        </p>
+    </h2> -->
 </body>
+</html>
