@@ -6,6 +6,7 @@ from parsing import Parser
 import pickle
 import numpy as np
 import shap
+import matplotlib.pyplot as plt
 
 app = FastAPI()
 
@@ -86,7 +87,6 @@ async def submit_form(request: Request, hltv_link: str = Form(...), ai_model: st
 
     np_data = np.array(data).reshape(1,-1)
     print(np_data)
-    print(np_data.shape)
     pred = model.predict(np_data)
     print(pred)
 
@@ -94,9 +94,23 @@ async def submit_form(request: Request, hltv_link: str = Form(...), ai_model: st
     shap_values = explainer(np_data)
     print(shap_values)
 
+    shap.plots.bar(shap_values)
+    plt.savefig("shap_summary_plot.png")
+
     # 'hltv_link' contains the submitted link
     with open("web/pred.html", "r") as file:
         html_content = file.read()
     
-    return templates.TemplateResponse("pred.html", {"request": request, "result": str(pred)})
+    return templates.TemplateResponse("pred.html", {"request": request, "result": str(pred), "stat1": f"{np_data[0,0]:.2f}",
+                                                    "stat2": str(np_data[0,1]), "stat3": str(np_data[0,2]), "stat4": str(np_data[0,3]),
+                                                    "stat5": str(np_data[0,4]), "stat6": str(np_data[0,5]), "stat7": str(np_data[0,6]),
+                                                    "stat8": str(np_data[0,7]), "stat9": str(np_data[0,8]), "stat10": str(np_data[0,9]),
+                                                    "stat11": str(np_data[0,10]), "stat12": str(np_data[0,11]), "stat13": str(np_data[0,12]),
+                                                    "stat14": str(np_data[0,13]), "stat15": str(np_data[0,14]), "stat16": str(np_data[0,15]),
+                                                    "stat17": str(np_data[0,16]), "stat18": str(np_data[0,17]), "stat19": str(np_data[0,18]),
+                                                    "stat20": str(np_data[0,19]), "stat21": str(np_data[0,20]), "stat22": str(np_data[0,21]),
+                                                    "stat23": str(np_data[0,22]), "stat24": str(np_data[0,26]), "stat25": str(np_data[0,23]),
+                                                    "stat26": str(np_data[0,27]), "stat27": str(np_data[0,24]), "stat28": str(np_data[0,28]),
+                                                    "stat29": str(np_data[0,25]), "stat30": str(np_data[0,29]), "stat31": str(np_data[0,30]),
+                                                    "stat32": str(np_data[0,32]), "stat33": str(np_data[0,31]), "stat34": str(np_data[0,33])})
     # return {"hltv_link": hltv_link, "Model": ai_model, "Map": map, "Predict": pred}
