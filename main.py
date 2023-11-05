@@ -93,17 +93,20 @@ async def submit_form(request: Request, hltv_link: str = Form(...), ai_model: st
     explainer = shap.Explainer(model)
     shap_values = explainer(np_data)
     print(shap_values)
+    shap.plots.waterfall(shap_values[0])
 
-    if ai_model == 'CatBoost':
-        if pred == 'True':
-            out = f"Given the stats of both teams and their performance on map {map}, {team_names[0]} is more likely to win"
-        else:
-            out = f"Given the stats of both teams and their performance on map {map}, {team_names[1]} is more likely to win"
+    if (pred[0] == 0):
+        sort = sorted(zip(np_data[0], np.linspace(0,49, dtype=np.int32)), key=lambda x: x[0], reverse=False)
     else:
-        if pred[0] == 1:
-            out = f"Given the stats of both teams and their performance on map {map}, {team_names[0]} is more likely to win"
-        else:
-            out = f"Given the stats of both teams and their performance on map {map}, {team_names[1]} is more likely to win"
+        sort = sorted(zip(np_data[0], np.linspace(0,49, dtype=np.int32)), key=lambda x: x[0], reverse=True)
+
+    sort = list(sort)
+    f_names = ["t1_winstreak","t2_winstreak","t1_h2h","t2_h2h","t1_ranking","t2_ranking","t1_weeks","t2_weeks","t1_age","t2_age","t1_rating","t2_rating","t1_winrate","t2_winrate","t1_5v4","t2_5v4","t1_4v5","t2_4v5","t1_maps","t2_maps","t1_pistol","t2_pistol","t1_rounds_lost","t1_rounds_won","t1_fp","t1_fp_percent","t2_rounds_lost","t2_rounds_won","t2_fp","t2_fp_percent","t1_team_rating","t1_event_rating","t2_team_rating","t2_event_rating","winstreak_diff","h2h_diff","ranking_diff","weeks_diff","age_diff","rating_diff","winrate_diff","5v4_diff","4v5_diff","maps_diff","pistol_diff","rounds_lost_diff","rounds_won_diff","fp_percent_diff","team_rating_diff","event_rating_diff"]
+
+    if pred[0] == 1:
+        out = f"Given the stats of both teams and their performance on map {map}, {team_names[0]} is more likely to win"
+    else:
+        out = f"Given the stats of both teams and their performance on map {map}, {team_names[1]} is more likely to win"
     # shap.plots.bar(shap_values)
     # plt.savefig("shap_summary_plot.png")
 
@@ -113,6 +116,9 @@ async def submit_form(request: Request, hltv_link: str = Form(...), ai_model: st
     
     rounded_array = np.round(np_data, 2)
     return templates.TemplateResponse("pred.html", {"request": request, "result": out, "stat1": str(rounded_array[0,0]),
+                                                    "Important1": f_names[sort[0][1]], "Important2": f_names[sort[1][1]],
+                                                    "Important3": f_names[sort[2][1]], "Important4": f_names[sort[3][1]],
+                                                    "Important5": f_names[sort[4][1]],
                                                     "Team1": team_names[0], "Team2": team_names[1],
                                                     "stat2": str(rounded_array[0,1]), "stat3": str(rounded_array[0,2]), "stat4": str(rounded_array[0,3]),
                                                     "stat5": str(rounded_array[0,4]), "stat6": str(rounded_array[0,5]), "stat7": str(rounded_array[0,6]),
