@@ -84,6 +84,18 @@
             align-items: center; 
             height: 100vh; 
         }
+
+        .list{
+            text-align: left;
+            padding-left: 25px;
+            margin: 8px 0;
+        }
+
+        .pred{
+            margin-bottom: 10px;
+            padding-bottom: 2px;
+            border-bottom: 2px solid rgb(73, 200, 0);
+        }
     </style>
 </head>
 <body>
@@ -186,12 +198,12 @@
         </table>
         <div class="container">
             <h3>Prediction:</h3>
-            <p>
+            <p class="pred">
                 {{ result }}
             </p>
             <p>
                 Here is a little breakdown behind the prediction:
-                <ul>
+                <ul class="list">
                     <li>{{ Important1 }}</li>
                     <li>{{ Important2 }}</li>
                     <li>{{ Important3 }}</li>
