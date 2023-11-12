@@ -96,11 +96,12 @@ async def submit_form(request: Request, hltv_link: str = Form(...), ai_model: st
     shap.plots.waterfall(shap_values[0])
 
     if (pred[0] == 0):
-        sort = sorted(zip(np_data[0], np.linspace(0,49, dtype=np.int32)), key=lambda x: x[0], reverse=False)
+        sort = sorted(zip(shap_values.values[0], np.linspace(0,49, dtype=np.int32)), key=lambda x: x[0], reverse=False)
     else:
-        sort = sorted(zip(np_data[0], np.linspace(0,49, dtype=np.int32)), key=lambda x: x[0], reverse=True)
+        sort = sorted(zip(shap_values.values[0], np.linspace(0,49, dtype=np.int32)), key=lambda x: x[0], reverse=True)
 
     sort = list(sort)
+    print(sort)
     f_names = ["t1_winstreak","t2_winstreak","t1_h2h","t2_h2h","t1_ranking","t2_ranking","t1_weeks","t2_weeks","t1_age","t2_age","t1_rating","t2_rating","t1_winrate","t2_winrate","t1_5v4","t2_5v4","t1_4v5","t2_4v5","t1_maps","t2_maps","t1_pistol","t2_pistol","t1_rounds_lost","t1_rounds_won","t1_fp","t1_fp_percent","t2_rounds_lost","t2_rounds_won","t2_fp","t2_fp_percent","t1_team_rating","t1_event_rating","t2_team_rating","t2_event_rating","winstreak_diff","h2h_diff","ranking_diff","weeks_diff","age_diff","rating_diff","winrate_diff","5v4_diff","4v5_diff","maps_diff","pistol_diff","rounds_lost_diff","rounds_won_diff","fp_percent_diff","team_rating_diff","event_rating_diff"]
 
     if pred[0] == 1:
