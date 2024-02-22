@@ -158,7 +158,7 @@ async def submit_form(request: Request, hltv_link: str = Form(...), ai_model: st
     # print(pred)
     # print(shap_values[0][0])
     # print(shap_values.values[0,:,1]
-    shap.plots.waterfall(explainer(df)[0,:,1])
+    # shap.plots.waterfall(explainer(df)[0,:,1])
 
     if ai_model == 'LightGBM':
         if pred[0] == 0:
@@ -175,7 +175,7 @@ async def submit_form(request: Request, hltv_link: str = Form(...), ai_model: st
 
     sort = list(sort)
     # print(sort)
-    f_names = ["t1_winstreak","t2_winstreak","t1_h2h","t2_h2h","t1_ranking","t2_ranking","t1_weeks","t2_weeks","t1_age","t2_age","t1_rating","t2_rating","t1_winrate","t2_winrate","t1_5v4","t2_5v4","t1_4v5","t2_4v5","t1_maps","t2_maps","t1_pistol","t2_pistol","t1_rounds_lost","t1_rounds_won","t1_fp","t1_fp_percent","t2_rounds_lost","t2_rounds_won","t2_fp","t2_fp_percent","t1_team_rating","t1_event_rating","t2_team_rating","t2_event_rating","winstreak_diff","h2h_diff","ranking_diff","weeks_diff","age_diff","rating_diff","winrate_diff","5v4_diff","4v5_diff","maps_diff","pistol_diff","rounds_lost_diff","rounds_won_diff","fp_percent_diff","team_rating_diff","event_rating_diff"]
+    f_names = [f"{fetch[1]} winstreak",f"{fetch[2]} winstreak",f"{fetch[1]} Head to Head wins",f"{fetch[2]} Head to Head wins",f"{fetch[1]} HLTV ranking",f"{fetch[2]} HLTV ranking",f"{fetch[1]} weeks in Top 30",f"{fetch[2]} weeks in Top 30",f"{fetch[1]} average age",f"{fetch[2]} average age",f"{fetch[1]} HLTV rating",f"{fetch[2]} HLTV rating",f"{fetch[1]} winrate",f"{fetch[2]} winrate",f"{fetch[1]} 5v4 Covnersions",f"{fetch[2]} 5v4 Conversions",f"{fetch[1]} 4v5 Conversions",f"{fetch[2]} 4v5 Conversions",f"{fetch[1]} played maps",f"{fetch[2]} played maps",f"{fetch[1]} pistol round win %",f"{fetch[2]} pistol round win %",f"{fetch[1]} avg. rounds lost in wins",f"{fetch[1]} avg. rounds won in losses",f"Map is {fetch[1]}'s first pick",f"{fetch[1]} pick this map as a first pick more often",f"{fetch[2]} avg. rounds lost in wins",f"{fetch[2]} avg. rounds won in losses",f"{fetch[2]}'s first pick",f"{fetch[2]} pick this map as a first pick more often",f"{fetch[1]}'s team rating on the event",f"{fetch[1]}'s players rating on the event",f"{fetch[2]}'s team rating on the event",f"{fetch[2]}'s players rating on the event","Winstreak Difference","Head to Head Difference","HLTV Ranking Difference","Weeks in top 30 Difference","Average age Difference","HLTV Rating Difference","Winrate Difference","5v4 Conversions Difference","4v5 Conversions Difference","Difference in the number of played maps","Difference in Pistol rounds winrate","Diference in the number of rounds lost in wins","Diference in the number of rounds won in losses","Difference in the First Pick %","Difference in team ratings on the event","Difference in players' ratings on the event"]
 
     if (pred[0] == 0 and type(pred[0]) is not str) or (pred[0] == 'False' and type(pred[0]) is str):
         out = f"Given the stats of both teams and their performance on map {map}, {fetch[2]} is more likely to win"
