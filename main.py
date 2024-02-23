@@ -178,9 +178,11 @@ async def submit_form(request: Request, hltv_link: str = Form(...), ai_model: st
     f_names = [f"{fetch[1]} winstreak",f"{fetch[2]} winstreak",f"{fetch[1]} Head to Head wins",f"{fetch[2]} Head to Head wins",f"{fetch[1]} HLTV ranking",f"{fetch[2]} HLTV ranking",f"{fetch[1]} weeks in Top 30",f"{fetch[2]} weeks in Top 30",f"{fetch[1]} average age",f"{fetch[2]} average age",f"{fetch[1]} HLTV rating",f"{fetch[2]} HLTV rating",f"{fetch[1]} winrate",f"{fetch[2]} winrate",f"{fetch[1]} 5v4 Covnersions",f"{fetch[2]} 5v4 Conversions",f"{fetch[1]} 4v5 Conversions",f"{fetch[2]} 4v5 Conversions",f"{fetch[1]} played maps",f"{fetch[2]} played maps",f"{fetch[1]} pistol round win %",f"{fetch[2]} pistol round win %",f"{fetch[1]} avg. rounds lost in wins",f"{fetch[1]} avg. rounds won in losses",f"Map is {fetch[1]}'s first pick",f"{fetch[1]} pick this map as a first pick more often",f"{fetch[2]} avg. rounds lost in wins",f"{fetch[2]} avg. rounds won in losses",f"{fetch[2]}'s first pick",f"{fetch[2]} pick this map as a first pick more often",f"{fetch[1]}'s team rating on the event",f"{fetch[1]}'s players rating on the event",f"{fetch[2]}'s team rating on the event",f"{fetch[2]}'s players rating on the event","Winstreak Difference","Head to Head Difference","HLTV Ranking Difference","Weeks in top 30 Difference","Average age Difference","HLTV Rating Difference","Winrate Difference","5v4 Conversions Difference","4v5 Conversions Difference","Difference in the number of played maps","Difference in Pistol rounds winrate","Diference in the number of rounds lost in wins","Diference in the number of rounds won in losses","Difference in the First Pick %","Difference in team ratings on the event","Difference in players' ratings on the event"]
 
     if (pred[0] == 0 and type(pred[0]) is not str) or (pred[0] == 'False' and type(pred[0]) is str):
-        out = f"Given the stats of both teams and their performance on map {map}, {fetch[2]} is more likely to win"
+        out1 = f"{map},"
+        out2 = f"{fetch[2]}"
     else:
-        out = f"Given the stats of both teams and their performance on map {map}, {fetch[1]} is more likely to win"
+        out1 = f"{map},"
+        out2 = f"{fetch[1]}"
     # shap.plots.bar(shap_values)
     # plt.savefig("shap_summary_plot.png")
 
@@ -189,7 +191,7 @@ async def submit_form(request: Request, hltv_link: str = Form(...), ai_model: st
         html_content = file.read()
     
     rounded_array = np.round(np_data, 2)
-    return templates.TemplateResponse("pred.html", {"request": request, "result": out, "stat1": str(rounded_array[0,0]),
+    return templates.TemplateResponse("pred.html", {"request": request, "result1": out1, "result2": out2, "stat1": str(rounded_array[0,0]),
                                                     "Important1": f_names[sort[0][1]], "Important2": f_names[sort[1][1]],
                                                     "Important3": f_names[sort[2][1]], "Important4": f_names[sort[3][1]],
                                                     "Important5": f_names[sort[4][1]],
