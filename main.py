@@ -2,7 +2,6 @@ from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from parsing import Parser
 import pickle
 import numpy as np
 import shap
@@ -142,7 +141,7 @@ async def submit_form(request: Request, hltv_link: str = Form(...), ai_model: st
     with open('cs_pipeline.pkl','rb') as f:
         pipeline = pickle.load(f)
 
-    df = pd.DataFrame(np_data, columns=["t1_winstreak","t2_winstreak","t1_h2h","t2_h2h",
+    df = pd.DataFrame(np_data.copy(), columns=["t1_winstreak","t2_winstreak","t1_h2h","t2_h2h",
                             "t1_ranking","t2_ranking","t1_weeks","t2_weeks","t1_age","t2_age","t1_rating","t2_rating",
                             "t1_winrate","t2_winrate","t1_5v4","t2_5v4","t1_4v5","t2_4v5","t1_maps","t2_maps",  
                             "t1_pistol","t2_pistol","t1_rounds_lost", "t1_rounds_won", "t1_fp", "t1_fp_percent",
