@@ -1,6 +1,7 @@
-# Software for predicting the outcomes of CS2 matches  
+# Software for predicting the outcomes of CS2 matches 
 
 ## You can test it out here - point516.xyz  
+![Demo](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTNtaXNmbDg0OWpscW5sNmdudmVlaTJ5N3BxOGZ2dzF5c2p0eWZpeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/23mIZ6vR4V6hjlUS8Y/source.gif)
 
 ### Here's a brief breakdown of what's in this repository:
 models - final fine-tuned versions of various machine learning models  
