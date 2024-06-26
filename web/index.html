@@ -11,8 +11,8 @@
         <div class="form-container"> 
             <div class="description"> 
                 <h3 class="heading">Hello and Welcome to AI-assisted Counter Strike 2 outcome predictor &#x1F917;</h3>  
-                <p>This &#x1F916; AI predictor tool gives predictions based on a variety of <span class="star">stats</span> &#x1F92F; collected from HLTV.ORG.</p>
-                <h1>Choose AI Model and Enter <a style="text-decoration: none;" href="https://www.hltv.org/matches">HLTV</a> Match Link*</h1>
+                <p>This &#x1F916; AI predictor tool gives predictions based on a variety of <span class="star">stats</span> (click) &#x1F92F; collected from HLTV.ORG.</p>
+                <h1>Enter <a style="text-decoration: none;" href="https://www.hltv.org/matches?predefinedFilter=top_tier">HLTV</a> Match Link*. Choose map and AI model</h1>
             </div>
             <form action="/predict" method="post">
                 <input style="display: inline-block;" type="text" name="hltv_link" id="hltv-link" placeholder="https://www.hltv.org/matches/...">
@@ -36,12 +36,15 @@
                     <input type="submit" value="Submit">
                 </div>
             </form>
+            <p style="text-align: center;">(I am no longer updating the matches, however, if you want to try it out, enter this link:</p>
+            <p style="text-align: center;">https://www.hltv.org/matches/2369492/natus-vincere-vs-eternal-fire-iem-katowice-2024)</p>
             <div class="side_note">1. Only today's matches are available for prediction</div>
-            <div class="side_note">2. New matches are added everyday at 10pm CET</div>
+            <div class="side_note">2. New matches are added everyday at 11am CET</div>
             <div class="side_note">3. If you are getting an error, that, probably, means that your match is not available for prediction</div>
+            <div class="side_note">4. If none of the links work, try this one (https://www.hltv.org/matches/2369492/natus-vincere-vs-eternal-fire-iem-katowice-2024)</div>
 
         </div>
-        <div class="stats">
+        <div class="stats" style="display: none;">
             <h5>Analyzed Stats</h5>
             <div class="used_stats">Current Winstreaks<br>
                 Head-to-Head score<br>
