@@ -19,7 +19,8 @@ class Parser:
         self.driver.get(url)
         time.sleep(10)
 
-        #variables for dataset        #should be updated each iteration
+        #variables for dataset        
+        #should be updated each iteration
         team_names = []
         maps = []
         y_true = []
