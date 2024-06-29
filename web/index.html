@@ -3,73 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="web/style.css">
-    <title>AI predictor</title>
+    <title>My Portfolio</title>
+    <style>
+        p {
+            margin:0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .projects {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            max-width: 1200px;
+        }
+        .project {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: calc(20% - 20px);
+            height: 200px;
+            margin: 10px;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .project:hover {
+            transform: translateY(-5px);
+        }
+        .info {
+            text-decoration: none;
+            height: 100%; 
+            color: #333;
+            font-weight: bold;
+            /* display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column; */
+        }
+        .project h2 {
+            height: 20%;
+            margin: 0;
+            font-size: 18px;
+            /* margin-top: 10px; */
+        }
+        .stack {
+            color: #8A2BE2;
+            height: 25%;
+            margin: 20px 0 0 0;
+            font-size: 12px;
+        }
+
+        .description {
+            height: 55%;
+            margin: 15px 0 0 0; 
+            font-size: 14px;
+            color: #666;
+        }
+
+        .links {
+            font-size: 14px;
+        }
+
+        .links a{
+            display: inline-block; /* Necessary for proper padding and border */
+            color: #0066cc; /* Bright blue for high contrast */
+            text-decoration: none; /* No underline by default */
+            padding: 1px 1px; 
+            border-bottom : 2px solid #0066cc; /* Solid border matching the text color */
+            transition: all 0.3s ease; /* Smooth transitions for hover effects */
+            cursor: pointer; /* Pointer cursor to indicate clickability */
+            margin-left: 5px;
+        }
+        
+        .links a:hover {
+            border-color: #8A2BE2; /* Darker border color on hover/focus */
+            text-decoration: none; /* Maintain no underline on hover */
+            color: #8A2BE2; /* Darker text color to match the border */
+        }
+
+        .links a:focus {
+            background-color: #e6f0ff; /* Light blue background on hover/focus */
+            border-color: #8A2BE2; /* Darker border color on hover/focus */
+            text-decoration: none; /* Maintain no underline on hover */
+            color: #8A2BE2; /* Darker text color to match the border */
+        }
+
+    </style>
 </head>
 <body>
-    <div class='row'>
-        <div class="form-container"> 
-            <div class="description"> 
-                <h3 class="heading">Hello and Welcome to AI-assisted Counter Strike 2 outcome predictor &#x1F917;</h3>  
-                <p>This &#x1F916; AI predictor tool gives predictions based on a variety of <span class="star">stats</span> (click) &#x1F92F; collected from HLTV.ORG.</p>
-                <h1>Enter <a style="text-decoration: none;" href="https://www.hltv.org/matches?predefinedFilter=top_tier">HLTV</a> Match Link*. Choose map and AI model</h1>
+    <header>
+        <h1>Welcome to My Portfolio</h1>
+        <p>Hi, I'm Abylay. Here is the a structured view on things I did or am doing or tried to do or trying to do. Some deployed, some on github.</p>
+    </header>
+    <div class="projects">
+        <div class="project">
+            <div class="info">
+                <h2>Esports Outcome Predictor</h2>
+                <!-- <h2>Project 1</h2> -->
+                <p class="stack"> Python, Selenium, Sklearn, XGBoost, CatBoost, LightGBM, PostgreSQL, SHAP, Pandas, Matplotlib, Seaborn, FastAPI</p>
+                <p class="description">End-to-end ML project to predict the outcomes of professional CS2 matches. </p>
             </div>
-            <form action="/predict" method="post">
-                <input style="display: inline-block;" type="text" name="hltv_link" id="hltv-link" placeholder="https://www.hltv.org/matches/...">
-                <select style="display: inline-block;" name="map" id="map">
-                    <option value="Mirage">Mirage</option>
-                    <option value="Inferno">Inferno</option>
-                    <option value="Nuke">Nuke</option>
-                    <option value="Overpass">Overpass</option>
-                    <option value="Vertigo">Vertigo</option>
-                    <option value="Ancient">Ancient</option>
-                    <option value="Anubis">Anubis</option>
-                </select>
-                <div class="row_2">
-                    <select style="display: inline-block; margin: 5px 1px;" name="ai_model" id="ai-model">
-                        <option value="XGBoost">XGBoost</option>
-                        <option value="CatBoost">CatBoost</option>
-                        <option value="LightGBM">LightGBM</option>
-                        <option value="LogReg">LogReg</option>
-                        <option value="LDA">LDA</option>
-                    </select>
-                    <input type="submit" value="Submit">
-                </div>
-            </form>
-            <p style="text-align: center;">(I am no longer updating the matches, however, if you want to try it out, enter this link:</p>
-            <p style="text-align: center;">https://www.hltv.org/matches/2369492/natus-vincere-vs-eternal-fire-iem-katowice-2024)</p>
-            <div class="side_note">1. Only today's matches are available for prediction</div>
-            <div class="side_note">2. New matches are added everyday at 11am CET</div>
-            <div class="side_note">3. If you are getting an error, that, probably, means that your match is not available for prediction</div>
-            <div class="side_note">4. If none of the links work, try this one (https://www.hltv.org/matches/2369492/natus-vincere-vs-eternal-fire-iem-katowice-2024)</div>
-
+            <div class="links">
+                <a href="/cs_bot">Try Out</a>
+                <a href="https://github.com/point516/cs_bot">Github</a>
+            </div>
         </div>
-        <div class="stats" style="display: none;">
-            <h5>Analyzed Stats</h5>
-            <div class="used_stats">Current Winstreaks<br>
-                Head-to-Head score<br>
-                Team Rankings<br>
-                Weeks in Top30<br>
-                Average Age<br>
-                Players' Ratings<br>
-                Map Winrate<br>
-                5 vs 4 conversions<br>
-                4 vs 5 conversions<br>
-                Number of Maps Played<br>
-                Pistol Rounds Winrate<br>
-                Average Rounds Lost<br>
-                Average Rounds Won<br>
-                First Pick Percentage<br>
-                Team Rating on Event<br>
-                Event Ratings<br>
+        <div class="project">
+            <div class="info">
+                <h2>Web Query Chatbot</h2>
+                <!-- <h2>Project 1</h2> -->
+                <p class="stack"> Python, Llama3, LangChain, Docker, Groq API, OpenAI API, Telegram Chatbot</p>
+                <p class="description"> A project I made for fun with Llama3-7b to query the web.</p>
+            </div>
+            <div class="links">
+                <a href="t.me/siriwb_bot">Try Out</a>
+                <a href="https://github.com/point516/llm_webQuery">Github</a>
+            </div>
+        </div>
+        <div class="project">
+            <div class="info">
+                <h2>Hackathon: Image Classification</h2>
+                <!-- <h2>Project 1</h2> -->
+                <p class="stack"> Python, Tensorflow, Keras</p>
+                <p class="description"> Second place at Hackathon. Identifying fire on images.</p>
+            </div>
+            <div class="links">
+                <a href="https://github.com/point516/SST-Hackathon">Github</a>
+            </div>
+        </div>
+        <div class="project">
+            <div class="info">
+                <h2>Esports Outcome Predictor</h2>
+                <!-- <h2>Project 1</h2> -->
+                <p class="stack"> Python, Selenium, Sklearn, XGBoost, CatBoost, LightGBM, PostgreSQL, SHAP, Pandas, Matplotlib, Seaborn, FastAPI</p>
+                <p class="description"> A simple website using fundamental web technologies.</p>
+            </div>
+            <div class="links">
+                <a href="#">Github</a>
+                <a href="#">Web App</a>
+            </div>
+        </div>
+        <div class="project">
+            <div class="info">
+                <h2>Esports Outcome Predictor</h2>
+                <!-- <h2>Project 1</h2> -->
+                <p class="stack"> Python, Selenium, Sklearn, XGBoost, CatBoost, LightGBM, PostgreSQL, SHAP, Pandas, Matplotlib, Seaborn, FastAPI</p>
+                <p class="description"> A simple website using fundamental web technologies.</p>
+            </div>
+            <div class="links">
+                <a href="#">Github</a>
+                <a href="#">Web App</a>
+            </div>
+        </div>
+        <div class="project">
+            <div class="info">
+                <h2>Esports Outcome Predictor</h2>
+                <!-- <h2>Project 1</h2> -->
+                <p class="stack"> Python, Selenium, Sklearn, XGBoost, CatBoost, LightGBM, PostgreSQL, SHAP, Pandas, Matplotlib, Seaborn, FastAPI</p>
+                <p class="description"> A simple website using fundamental web technologies.</p>
+            </div>
+            <div class="links">
+                <a href="#">Github</a>
+                <a href="#">Web App</a>
+            </div>
+        </div>
+        <div class="project">
+            <div class="info">
+                <h2>Esports Outcome Predictor</h2>
+                <!-- <h2>Project 1</h2> -->
+                <p class="stack"> Python, Selenium, Sklearn, XGBoost, CatBoost, LightGBM, PostgreSQL, SHAP, Pandas, Matplotlib, Seaborn, FastAPI</p>
+                <p class="description"> A simple website using fundamental web technologies.</p>
+            </div>
+            <div class="links">
+                <a href="#">Github</a>
+                <a href="#">Web App</a>
+            </div>
+        </div>
+        <div class="project">
+            <div class="info">
+                <h2>Esports Outcome Predictor</h2>
+                <!-- <h2>Project 1</h2> -->
+                <p class="stack"> Python, Selenium, Sklearn, XGBoost, CatBoost, LightGBM, PostgreSQL, SHAP, Pandas, Matplotlib, Seaborn, FastAPI</p>
+                <p class="description"> A simple website using fundamental web technologies.</p>
+            </div>
+            <div class="links">
+                <a href="#">Github</a>
+                <a href="#">Web App</a>
+            </div>
+        </div>
+        <div class="project">
+            <div class="info">
+                <h2>Esports Outcome Predictor</h2>
+                <!-- <h2>Project 1</h2> -->
+                <p class="stack"> Python, Selenium, Sklearn, XGBoost, CatBoost, LightGBM, PostgreSQL, SHAP, Pandas, Matplotlib, Seaborn, FastAPI</p>
+                <p class="description"> A simple website using fundamental web technologies.</p>
+            </div>
+            <div class="links">
+                <a href="#">Github</a>
+                <a href="#">Web App</a>
+            </div>
+        </div>
+        <div class="project">
+            <div class="info">
+                <h2>Esports Outcome Predictor</h2>
+                <!-- <h2>Project 1</h2> -->
+                <p class="stack"> Python, Selenium, Sklearn, XGBoost, CatBoost, LightGBM, PostgreSQL, SHAP, Pandas, Matplotlib, Seaborn, FastAPI</p>
+                <p class="description"> A simple website using fundamental web technologies.</p>
+            </div>
+            <div class="links">
+                <a href="#">Github</a>
+                <a href="#">Web App</a>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div id="info">
-            <strong>XGBoost: </strong> Predictions Accuracy: 79.15% <br> <strong>Important Stats:</strong> Map Winrates, 5 VS 4 Conversions, Team Ratings, Event Ratings
-        </div>
-    </div>
-    <script src="web/script.js"></script>
 </body>
 </html>
