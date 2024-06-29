@@ -25,6 +25,14 @@ async def read_root():
     
     return HTMLResponse(content=html_content)
 
+@app.get("/cs_bot", response_class=HTMLResponse)
+async def read_root():
+    
+    with open("web/cs_bot.html", "r") as file:
+        html_content = file.read()
+    
+    return HTMLResponse(content=html_content)
+
 @app.post("/predict", response_class=HTMLResponse)
 async def submit_form(request: Request, hltv_link: str = Form(...), ai_model: str = Form(...), map: str = Form(...)):   
 
